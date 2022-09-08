@@ -20,8 +20,6 @@ export default function OnboardingPage  (
         }, 2000)
     }
 
-    console.log(props);
-    
     return (
         <>
        

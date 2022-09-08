@@ -28,7 +28,7 @@ export function SignUpSection (): JSX.Element {
 
          setTimeout(() => {
              setLoading(true)
-             void router.push(`/partners/${formState.phone.trim()}`)
+             void router.push(`/partner/${formState.phone.trim()}`)
          }, 1500)
 
         try{
@@ -36,11 +36,13 @@ export function SignUpSection (): JSX.Element {
               method: 'POST',
               body: JSON.stringify({...formState, referrals: 0})
           })
+           setTimeout(() => {
             setFormState({
                 phone: '',
                 business: '',
                 email: ''
             })
+           },2000)
         }catch (e) {
            console.error(e)
         }
