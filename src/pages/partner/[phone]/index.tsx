@@ -95,7 +95,7 @@ export async function getServerSideProps(
     context: GetServerSidePropsContext
   ): Promise<GetServerSidePropsResult<PartnersProps>> {
     const dev = process.env.NODE_ENV !== 'production';
-     const link = `${dev? 'http:localhost:3000' : process.env.NEXT_PUBLIC_SITE}/api/partners?phone=${context.params?.phone as string}`
+     const link = `${dev? 'http:localhost:3001' : process.env.NEXT_PUBLIC_SITE}/api/partners?phone=${context.params?.phone as string}`
     let response: any
     try {
         const req = await  fetch(link)

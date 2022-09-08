@@ -2,7 +2,6 @@ import type { NextApiRequest, NextApiResponse } from 'next'
 import Model from './model'
 import connectDB from "./connectDb";
 
-
 async function handler (req: NextApiRequest, res: NextApiResponse): Promise<any> {
     if (req.method === 'POST') {
         try {
