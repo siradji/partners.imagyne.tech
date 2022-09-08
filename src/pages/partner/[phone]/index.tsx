@@ -2,7 +2,7 @@ import { GetServerSidePropsContext, GetServerSidePropsResult, InferGetServerSide
 import { useRouter } from "next/router";
 import { useState } from "react";
 import { Bookmark, Copy, Star } from "react-feather";
-import { Cards } from "../components/Cards";
+import Cards from "../components/Cards";
 
 
 export default function OnboardingPage  (
