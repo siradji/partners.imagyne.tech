@@ -56,8 +56,8 @@ export default function OnboardingPage  (
           </section>
           <section className="mt-28">
                 <div className="flex flex-row items-center justify-center">
-                    <h1 className="text-lg font-medium text-imagyne-secondary">Partner's guidelines</h1>
-                    <Bookmark  className="text-imagyne-primary" size={20}/>
+                    <h1 className="text-lg font-medium text-imagyne-secondary">{`Partner's guidelines`}</h1>
+                    <Bookmark  className="text-imagyne-primary" size={20} />
                 </div>
                 <div>
                     <div className="flex flex-row space-x-1 items-center my-2">
