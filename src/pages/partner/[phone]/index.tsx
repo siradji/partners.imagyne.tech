@@ -22,7 +22,6 @@ export default function OnboardingPage  (
 
     return (
         <>
-       
           <section className="my-5">
                 <div className="w-3/4 md:w-full">
                     <h1 className="text-ellipsis text-lg font-light text-imagyne-primary">{`Welcome back , ${props.business}`}</h1>
@@ -30,19 +29,29 @@ export default function OnboardingPage  (
                 </div>
           </section>
           <section >
+         <div>
          <div className="flex flex-row items-center space-x-1 -px-1">
-         <Cards>
+         <Cards classname="w-1/2 md:w-1/3">
                 <div className="flex flex-col  text-lg font-medium text-imagyne-accent">
-                   <p className="font-medium">Total Referrals</p>
+                   <p className="font-medium text-center">Total Referrals</p>
                     <p className="font-bold text-center">{props.referrals}</p>
                 </div>
             </Cards>
-            <Cards>
+            <Cards classname="w-1/2 md:w-1/3">
                 <div className="flex flex-col  text-lg font-medium text-imagyne-accent">
-                    <p className="">Your referral link</p>
-                    <pre className="text-xs mt-2 w-3/4 overflow-x-scroll ">{link}</pre>
+                    <p className=" text-center">Rewards Earned</p>
+                    <p className="font-bold text-center ">NGN {props.referrals * Number(process.env.NEXT_PUBLIC_REWARDS) }</p>
                 </div>
             </Cards>
+         </div>
+         <div className="mt-2">
+         <Cards classname="w-full">
+                <div className="flex flex-col  text-lg font-medium text-imagyne-accent">
+                    <p className=" text-center">Your referral link</p>
+                    <pre className="text-xs mt-2 overflow-x-scroll ">{link}</pre>
+                </div>
+            </Cards>
+         </div>
          </div>
       <div className="relative">
       {showPopUp &&  <span className="absolute top-0 right-3 rounded-md shadow-lg bg-white z-50 px-3 py-2 text-sm text-imagyne-secondary">Copied link</span> }
@@ -54,7 +63,7 @@ export default function OnboardingPage  (
          </button>
       </div>
           </section>
-          <section className="mt-28">
+          <section className="mt-10">
                 <div className="flex flex-row items-center justify-center">
                     <h1 className="text-lg font-medium text-imagyne-secondary">{`Partner's guidelines`}</h1>
                     <Bookmark  className="text-imagyne-primary" size={20} />

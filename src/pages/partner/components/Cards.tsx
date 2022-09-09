@@ -1,8 +1,9 @@
+import classNames from "classnames";
 import {  PropsWithChildren } from "react";
 
-export default function Cards (props: PropsWithChildren): JSX.Element {
+export default function Cards (props: PropsWithChildren<{classname?: string}>): JSX.Element {
     return (
-        <div className="p-3 shadow-xl rounded  bg-imagyne-secondary flex w-1/2 md:w-1/3 h-[100px]">
+        <div className={classNames("p-3 shadow-xl rounded  bg-imagyne-secondary flex  h-[100px]", props.classname)}>
             {props.children}
         </div>
     )
