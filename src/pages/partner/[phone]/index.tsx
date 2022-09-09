@@ -32,15 +32,15 @@ export default function OnboardingPage  (
           <section >
          <div className="flex flex-row items-center space-x-1 -px-1">
          <Cards>
-                <div className="flex flex-col  items-center justify-center text-lg font-medium text-imagyne-accent">
+                <div className="flex flex-col  justify-center text-lg font-medium text-imagyne-accent">
                    <p className="font-medium">Total Referrals</p>
                     <p className="font-bold">{props.referrals}</p>
                 </div>
             </Cards>
             <Cards>
-                <div className="flex flex-col items-center text-lg font-medium text-imagyne-accent">
+                <div className="flex flex-col  text-lg font-medium text-imagyne-accent">
                     <p className="">Your link</p>
-                    <p className="text-xs mt-2 w-3/4 overflow-x-scroll ">{link}</p>
+                    <pre className="text-xs mt-2 w-3/4 overflow-x-scroll ">{link}</pre>
                 </div>
             </Cards>
          </div>
@@ -95,7 +95,7 @@ export async function getServerSideProps(
     context: GetServerSidePropsContext
   ): Promise<GetServerSidePropsResult<PartnersProps>> {
     const dev = process.env.NODE_ENV !== 'production';
-     const link = `${dev? 'http:localhost:3001' : process.env.NEXT_PUBLIC_SITE}/api/partners?phone=${context.params?.phone as string}`
+     const link = `${dev? 'http:localhost:3000' : process.env.NEXT_PUBLIC_SITE}/api/partners?phone=${context.params?.phone as string}`
     let response: any
     try {
         const req = await  fetch(link)
