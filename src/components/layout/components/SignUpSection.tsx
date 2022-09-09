@@ -2,7 +2,8 @@ import { Form } from "@components/Form";
 import { useRouter } from "next/router";
 import { ChangeEvent, useState } from "react";
 import { ContentSection } from "./ContentSection";
-
+import NextImage from 'next/image'
+import Loader from '@assets/visuals/spinner.svg'
 interface FormState {
     email: string
     phone: string
@@ -50,7 +51,18 @@ export function SignUpSection (): JSX.Element {
     }
     return (
        <section className="mt-10 flex flex-col  md:flex-row-reverse">
- <Form
+            {loading ? <>
+            <div className="flex flex-col justify-center">
+                    <NextImage 
+                    width={150}
+                    height={150}
+                        src={Loader}
+                    />
+                    <h3 className="text-center text-lg font-normal text-imagyne-secondary">Creating your personlized link....</h3>
+            </div>
+            </>: (
+                <>
+                <Form
         onSubmit={(e) => void handleOnformSubmit(e)}
         testId='form-collection-home-page'
         >
@@ -91,6 +103,8 @@ export function SignUpSection (): JSX.Element {
                  />
         </Form>
         <ContentSection />
+                </>
+            )}
        </section>
     )
 }
