@@ -1,14 +1,17 @@
 import { GetServerSidePropsContext, GetServerSidePropsResult, InferGetServerSidePropsType } from "next";
 import { useRouter } from "next/router";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { Bookmark, Copy, Star } from "react-feather";
 import Cards from "../components/Cards";
+import axios from 'axios'
 
+interface PartnersProps  {email: string, referrals: number, phone: string, business: string} 
 
 export default function OnboardingPage  (
     props: InferGetServerSidePropsType<typeof getServerSideProps>)
     : JSX.Element {
     const [showPopUp, setShowPopUp] = useState<boolean>(false)
+    const [data, setData]  = useState<PartnersProps>(props)
     const router = useRouter()
     const link = `${process.env.NEXT_PUBLIC_REF_LINK}/${router.query?.phone}`
 
@@ -19,6 +22,17 @@ export default function OnboardingPage  (
           setShowPopUp(false)  
         }, 2000)
     }
+
+    useEffect(() => {
+            const interval  = setInterval( () => {
+                const dev = process.env.NODE_ENV !== 'production'
+                const link = `${dev ? '' : process.env.NEXT_PUBLIC_SITE}/api/partners?phone=${router.query?.phone as string}`
+                fetch(link)
+                .then(res => res.json())
+                .then((_data) => setData(_data.data as PartnersProps))
+            }, 30000)
+        return () => clearInterval(interval)
+    }, [])
 
     return (
         <>
@@ -34,13 +48,13 @@ export default function OnboardingPage  (
          <Cards classname="w-1/2 md:w-1/3">
                 <div className="flex flex-col  text-lg font-medium text-imagyne-accent">
                    <p className="font-medium text-center">Total Referrals</p>
-                    <p className="font-bold text-center">{props.referrals}</p>
+                    <p className="font-bold text-center">{data.referrals}</p>
                 </div>
             </Cards>
             <Cards classname="w-1/2 md:w-1/3">
                 <div className="flex flex-col  text-lg font-medium text-imagyne-accent">
                     <p className=" text-center">Rewards Earned</p>
-                    <p className="font-bold text-center ">NGN {props.referrals * Number(process.env.NEXT_PUBLIC_REWARDS) }</p>
+                    <p className="font-bold text-center ">NGN {data.referrals * Number(process.env.NEXT_PUBLIC_REWARDS) }</p>
                 </div>
             </Cards>
          </div>
@@ -99,7 +113,6 @@ export default function OnboardingPage  (
 }
 
 
-interface PartnersProps  {email: string, referrals: number, phone: string, business: string} 
 export async function getServerSideProps(
     context: GetServerSidePropsContext
   ): Promise<GetServerSidePropsResult<PartnersProps>> {
